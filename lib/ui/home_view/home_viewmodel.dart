@@ -1,28 +1,40 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:stacked_weather_app/app/router/app_router.locator.dart';
-import 'package:stacked_weather_app/app/router/app_router.router.dart';
 import 'package:stacked_weather_app/services/api_service/api_service.dart';
+import 'package:stacked_weather_app/utils/failure.dart';
 
+import '../../app/app.locator.dart';
+import '../../app/app.router.dart';
 import '../../model/weather.dart';
 
 class HomeViewModel extends BaseViewModel {
+  String cityName = '';
+
   final navigator = locator<NavigationService>();
   final api = locator<ApiService>();
+  final snackBarService = locator<SnackbarService>();
 
-  late Weather _weather;
-
-  Weather get weather {
-    getWeather();
-    return _weather;
-  }
+  late Weather weather;
 
   void getWeather() async {
-    _weather = await api.getWeatherByCity('Akure');
-    notifyListeners();
+    try {
+      setBusy(true);
+      weather =
+          await api.getWeatherByCity(cityName.isEmpty ? 'Akure' : cityName);
+      notifyListeners();
+    } on Failure catch (e) {
+      snackBarService.showSnackbar(message: e.message);
+    } finally {
+      setBusy(false);
+    }
   }
 
-  void goToCity(){
-    navigator.navigateTo(Routes.cityView);
+  void goToCity() async {
+    try {
+      cityName = (await navigator.navigateTo(Routes.cityView)).toString();
+      getWeather();
+    } catch (e) {
+      throw Failure(message: e.toString());
+    }
   }
 }

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:stacked_weather_app/app/router/app_router.locator.dart';
-import 'package:stacked_weather_app/app/router/app_router.router.dart';
+
+import 'app/app.locator.dart';
+import 'app/app.router.dart';
 
 void main() {
   setupLocator();
@@ -15,9 +16,8 @@ class WeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      initialRoute: Routes.homeView,
       onGenerateRoute: StackedRouter().onGenerateRoute,
-      navigatorKey: locator<NavigationService>().navigatorKey,
+      navigatorKey: StackedService.navigatorKey,
     );
   }
 }

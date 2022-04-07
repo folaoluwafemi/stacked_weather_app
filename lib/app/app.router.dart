@@ -10,8 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 
-import '../../ui/city_screen/city_view.dart';
-import '../../ui/home_view/home_view.dart';
+import '../ui/city_screen/city_view.dart';
+import '../ui/home_view/home_view.dart';
 
 class Routes {
   static const String homeView = '/';

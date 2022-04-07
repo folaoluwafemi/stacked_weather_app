@@ -1,4 +1,4 @@
-abstract class LocationService {
-  Future<void> checkPermission();
-  dynamic getCurrentLocation();
-}
+// abstract class LocationService {
+//   Future<void> checkPermission();
+//   dynamic getCurrentLocation();
+// }

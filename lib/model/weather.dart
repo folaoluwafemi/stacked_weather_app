@@ -1,5 +1,6 @@
 import 'package:stacked_weather_app/model/location_model.dart';
 
+
 class Weather {
   final double temp;
   final int humidity;
