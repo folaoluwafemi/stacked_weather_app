@@ -39,6 +39,8 @@ dependencies:
   get_it: ^7.2.0
   font_awesome_flutter: ^10.1.0
   http: ^0.13.4
+  geolocator: ^7.0.0-nullsafety.0
+  permission_handler: ^5.1.0+2
 
 dev_dependencies:
   flutter_test:

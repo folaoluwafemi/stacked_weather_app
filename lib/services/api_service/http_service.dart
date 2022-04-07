@@ -8,7 +8,7 @@ import 'package:stacked_weather_app/services/api_service/api_service.dart';
 const String authority = 'api.openweathermap.org';
 const String unencodedPath = 'data/2.5/weather';
 const String rand = '/data/2.5/weather?q={city name}&appid={API key}';
-const String _API_KEY = '421c144f1b0e8be2ba9c473f05cde42a';
+const String _apiKey = '421c144f1b0e8be2ba9c473f05cde42a';
 
 class HttpService implements ApiService {
   Client client = Client();
@@ -16,11 +16,10 @@ class HttpService implements ApiService {
   @override
   getWeatherByLocation(LocationModel location) async {
     Uri url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.long}&appid=$_API_KEY');
+        'https://api.openweathermap.org/data/2.5/weather?lat=${location.lat}&lon=${location.long}&appid=$_apiKey');
     Response response = await client.get(url);
 
     if (response.statusCode != 200) {
-      print(response.body);
       return Future.error(
           'an error occurred, unable to fetch data: ${StackTrace.current}');
     }
@@ -29,7 +28,6 @@ class HttpService implements ApiService {
         jsonDecode(response.body) as Map<String, dynamic>;
 
     Weather weather = Weather.fomMap(json);
-    print(weather);
 
     return weather;
   }
@@ -37,20 +35,18 @@ class HttpService implements ApiService {
   @override
   getWeatherByCity(String city) async {
     Uri url = Uri.parse(
-        'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$_API_KEY');
+        'https://api.openweathermap.org/data/2.5/weather?q=$city&appid=$_apiKey');
     Response response = await client.get(url);
 
     if (response.statusCode != 200) {
-      print(response.body);
       return Future.error(
-          'an error occured, unable to fetch data: ${StackTrace.current}');
+          'an error occurred, unable to fetch data: ${StackTrace.current}');
     }
 
     Map<String, dynamic> json =
         jsonDecode(response.body) as Map<String, dynamic>;
 
     Weather weather = Weather.fomMap(json);
-    print(weather);
     return weather;
   }
 }

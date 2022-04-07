@@ -9,7 +9,6 @@
 import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
-import 'package:stacked_weather_app/services/api_service/api_service.dart';
 
 import '../../services/api_service/http_service.dart';
 
@@ -21,6 +20,6 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
       environment: environment, environmentFilter: environmentFilter);
 
 // Register dependencies
-  locator.registerLazySingleton<ApiService>(() => HttpService());
+  locator.registerLazySingleton(() => HttpService());
   locator.registerLazySingleton(() => NavigationService());
 }
